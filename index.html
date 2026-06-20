@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Movie Search</title>
+    <title>Image Gallery</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="card">
+<div class="container">
 
-    <h2> Movie Search</h2>
+    <h2>Image Gallery</h2>
 
-    <input type="text" id="search" placeholder="Search movie...">
-    <input type="number" id="year" placeholder="Year (optional)">
+    <div class="gallery" id="gallery"></div>
 
-    <button onclick="getMovies()">Search</button>
+</div>
 
-    <div id="movies"></div>
+<!-- preview modal -->
+<div id="modal" class="modal">
+
+    <span onclick="closeModal()" class="close">X</span>
+
+    <img id="bigImg">
+
+    <button onclick="prev()">◀</button>
+    <button onclick="next()">▶</button>
 
 </div>
 
