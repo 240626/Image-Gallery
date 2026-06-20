@@ -1,38 +1,53 @@
-function getMovies(){
+let images = [
+    "seklin linkini bura elave ed ne qeder istesen elave ede bilersen , de qoy",
+    "https://upload.wikimedia.org/wikipedia/commons/8/8e/BMW_M5_Competition_IMG_0799.jpg"
+];
 
-    let title = document.getElementById("search").value;
-    let year = document.getElementById("year").value;
+let index = 0;
 
-    if(title == "") return;
+loadGallery();
 
-    let url = `https://www.omdbapi.com/?apikey=thewdb&s=${title}`;
+function loadGallery(){
 
-    if(year != ""){
-        url += `&y=${year}`;
-    }
+    let box = document.getElementById("gallery");
 
-    fetch(url)
-    .then(res => res.json())
-    .then(data => {
+    images.forEach((img,i) => {
 
-        let box = document.getElementById("movies");
-        box.innerHTML = "";
-
-        if(!data.Search) return;
-
-        data.Search.forEach(movie => {
-
-            box.innerHTML += `
-            <div class="movie">
-                <img src="${movie.Poster}">
-                <div>
-                    <h3>${movie.Title}</h3>
-                    <p>${movie.Year}</p>
-                </div>
-            </div>
-            `;
-        });
+        box.innerHTML += `<img src="${img}" onclick="openImg(${i})">`;
 
     });
+}
 
+function openImg(i){
+
+    index = i;
+
+    document.getElementById("modal").style.display = "flex";
+    document.getElementById("bigImg").src = images[index];
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display = "none";
+}
+
+function next(){
+
+    index++;
+
+    if(index >= images.length){
+        index = 0;
+    }
+
+    document.getElementById("bigImg").src = images[index];
+}
+
+function prev(){
+
+    index--;
+
+    if(index < 0){
+        index = images.length - 1;
+    }
+
+    document.getElementById("bigImg").src = images[index];
 }
